@@ -3,6 +3,9 @@ package com.rp.sec01;
 import com.rp.courseutil.Util;
 import reactor.core.publisher.Mono;
 
+import java.util.concurrent.Callable;
+import java.util.function.Supplier;
+
 public class Lec05MonoFromSupplier {
 
     public static void main(String[] args) {
@@ -12,8 +15,22 @@ public class Lec05MonoFromSupplier {
 //        Mono<String> mono = Mono.just(getName());
 
         // Try to lazily evaluate things.
-        Mono<String> mono = Mono.fromSupplier(()-> getName());
+//        Mono<String> mono = Mono.fromSupplier(()-> getName());
+//        mono.subscribe(Util.onNext());
+
+
+        Supplier<String> stringSupplier = ()-> getName();
+        Mono<String> mono = Mono.fromSupplier(stringSupplier);
         mono.subscribe(Util.onNext());
+
+        //Callable introduced much before java 8
+
+        Callable<String> stringCallable = () -> getName();
+        Mono.fromCallable(stringCallable).subscribe(
+                Util.onNext()
+        );
+
+
 
     }
 
