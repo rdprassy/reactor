@@ -2,6 +2,7 @@ package com.rp.sec01;
 
 import com.rp.courseutil.Util;
 import reactor.core.publisher.Mono;
+import reactor.core.scheduler.Schedulers;
 
 public class Lec06SupplierRefactoring {
 
@@ -9,8 +10,14 @@ public class Lec06SupplierRefactoring {
 
         //only subscription would call the execution.
         getName();
+        //getName().subscribe(Util.onNext());
+        // ideally it waits for to pull up name making it await.
+
+        getName().subscribeOn(Schedulers.boundedElastic()).subscribe(Util.onNext());
         getName();
-        getName().subscribe(Util.onNext());
+
+        Util.sleepSeconds(4);
+
 
 
     }
