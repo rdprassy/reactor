@@ -13,7 +13,8 @@ public class Lec06SupplierRefactoring {
         //getName().subscribe(Util.onNext());
         // ideally it waits for to pull up name making it await.
 
-        getName().subscribeOn(Schedulers.boundedElastic()).subscribe(Util.onNext());
+        String s = getName().subscribeOn(Schedulers.boundedElastic()).block();
+        System.out.println(s);
         getName();
 
         Util.sleepSeconds(4);
