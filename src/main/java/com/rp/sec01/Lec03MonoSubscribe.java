@@ -7,7 +7,9 @@ public class Lec03MonoSubscribe {
     public static void main (String args[]){
 
 
-        Mono<String> mono = Mono. just("ball");
+        Mono<Integer> mono = Mono. just("ball")
+                .map(String::length)
+                .map(l->l/0);
 
         // one way of doing things
         mono.subscribe();
