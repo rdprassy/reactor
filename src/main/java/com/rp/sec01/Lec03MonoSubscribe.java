@@ -10,7 +10,7 @@ public class Lec03MonoSubscribe {
 
         Mono<Integer> mono = Mono. just("ball")
                 .map(String::length)
-                .map(l->l/0);
+                .map(l->l/1);
 
         // one way of doing things
         mono.subscribe();
